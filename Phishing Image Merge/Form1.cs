@@ -22,7 +22,7 @@ namespace Phishing_Image_Merge
         private void button1_Click(object sender, EventArgs e)
         {
             string folderPath = Settings1.Default.ImagePath;
-            List<string> files = Directory.GetFiles(folderPath, "*.jpg").ToList();
+            List<string> files = Directory.GetFiles(folderPath).ToList();
             bool isMerge1 = checkBoxMerge1.Checked;
             bool isMerge2 = checkBoxMerge2.Checked;
             bool isPlayFacebook = checkBoxPlayFacebook.Checked;
@@ -33,43 +33,48 @@ namespace Phishing_Image_Merge
 
             Thread thread = new Thread(() =>
             {
-                if (isMerge1)
+                try
                 {
-                    for (int i = 0; i < 1000; i++)
+                    if (isMerge1)
                     {
-                        var list = RandomSelect(files, 5);
+                        for (int i = 0; i < 1000; i++)
+                        {
+                            var list = RandomSelect(files, 5);
 
-                        AuraeMergeImages.MergeImages(list, "Merge1");
+                            AuraeMergeImages.MergeImages(list, "Merge1");
+                        }
                     }
-                }
 
-                if (isMerge2)
-                {
-                    for (int i = 0; i < 1000; i++)
+                    if (isMerge2)
                     {
-                        var list = RandomSelect(files, 5);
+                        for (int i = 0; i < 1000; i++)
+                        {
+                            var list = RandomSelect(files, 5);
 
-                        AuraeMergeImages.MergeImagesV2(list, "Merge2");
+                            AuraeMergeImages.MergeImagesV2(list, "Merge2");
+                        }
                     }
-                }
 
-                if (isPlayFacebook)
-                {
-                    foreach (string file in files)
+                    if (isPlayFacebook)
                     {
-                        AuraeMergeImages.MergeImageWithButton(file, "Button\\Facebook.png", "PlayFacebook");
+                        foreach (string file in files)
+                        {
+                            AuraeMergeImages.MergeImageWithButton(file, "Button\\Facebook.png", "PlayFacebook");
+                        }
                     }
-                }
 
-                if (isPlaySelect && playSelectPathIsExist)
-                {
-                    foreach (string file in files)
+                    if (isPlaySelect && playSelectPathIsExist)
                     {
-                        AuraeMergeImages.MergeImageWithButton(file, playSelectPath, "Play tuỳ chọn");
+                        foreach (string file in files)
+                        {
+                            AuraeMergeImages.MergeImageWithButton(file, playSelectPath, "Play tuỳ chọn");
+                        }
                     }
+
+
+   
                 }
-
-
+                catch { }
                 MessageBox.Show("Đã hoàn thành ghép ảnh!");
             });
             thread.IsBackground = true;
