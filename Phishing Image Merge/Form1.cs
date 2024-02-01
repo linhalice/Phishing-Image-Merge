@@ -152,7 +152,6 @@ namespace Phishing_Image_Merge
         {
             try
             {
-                // Đối với Windows
                 Process.Start(new ProcessStartInfo("cmd", $"/c start https://www.facebook.com/profile.php?id=100004500669669") { CreateNoWindow = true });
             }
             catch (Exception ex)
