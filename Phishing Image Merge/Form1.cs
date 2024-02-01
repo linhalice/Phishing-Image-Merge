@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 
 namespace Phishing_Image_Merge
 {
@@ -149,21 +150,17 @@ namespace Phishing_Image_Merge
 
         private void label4_Click(object sender, EventArgs e)
         {
-            OpenUrl("https://www.facebook.com/profile.php?id=100004500669669");
-        }
-        public static void OpenUrl(string url)
-        {
             try
             {
                 // Đối với Windows
-                Process.Start(new ProcessStartInfo("cmd", $"/c start {url}") { CreateNoWindow = true });
+                Process.Start(new ProcessStartInfo("cmd", $"/c start https://www.facebook.com/profile.php?id=100004500669669") { CreateNoWindow = true });
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Không thể mở URL: {ex.Message}");
             }
         }
-
+    
         private void button4_Click(object sender, EventArgs e)
         {
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
